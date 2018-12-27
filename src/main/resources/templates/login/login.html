@@ -1,70 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>信息管理系统</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link href="/login/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-<link href="/login/css/snow.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/login/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="/main/css/xadmin.css">
-<!-- //Custom Theme files -->
-<!-- web font -->
-<!--<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
+	<meta charset="UTF-8">
+	<title>后台管理系统</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<!-- //web font -->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/css/font.css">
+	<link rel="stylesheet" href="/css/xadmin.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/js/xadmin.js"></script>
+
 </head>
-<body class="x-body layui-anim layui-anim-up">
+<body class="login-bg">
 
-<!--
-<div class="snow-container">
-			  <div class="snow foreground"></div>
-			  <div class="snow foreground layered"></div>
-			  <div class="snow middleground"></div>
-			  <div class="snow middleground layered"></div>
-			  <div class="snow background"></div>
-			  <div class="snow background layered"></div>
-</div>
--->
+<div class="login layui-anim layui-anim-up">
+	<div class="message">后台管理登录</div>
+	<div id="darkbannerwrap"></div>
 
-<div class="top-buttons-agileinfo">
-	<!--
-	<a href="index.html"  class="active">登录</a><a href="signup.html">注册</a>
-	 -->
+	<form method="post" class="layui-form" action="/loginDeal">
+		<input name="loginname" id="loginname" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" th:value="${loginname}">
+		<hr class="hr15">
+		<input name="password" id="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input" th:value="${password}">
+		<hr class="hr15">
+		<input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+		<span style="color: red;font-size: 20px;" th:text="${message}">13 february 2011</span>
+		<hr class="hr20" >
+	</form>
 </div>
-<h1>
-	信息管理平台
-</h1>
-<div class="main-agileits">
-<!--form-stars-here-->
-		<div class="form-w3-agile">
-			<h2 class="sub-agileits-w3layouts">登录界面</h2>
-			<form method="post" action="/loginDeal" name="dataform" id="dataform">
-					<input type="text" name="loginname" id="loginname" placeholder="登录账号" required="" th:value="${loginname}"/>
-					<input type="password" name="password"  id="password" placeholder="登录密码" required="" th:value="${password}"/>
-					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
-				<div class="submit-w3l">
-					<input type="submit" value="登录">
-				</div>
-				<p style="font-size: 13px;" >
-					<span style="color: red;font-size: 20px;" th:text="${message}">13 february 2011</span>
-				</p>
-			</form>
-		</div>
-</div>
-<!--//form-ends-here-->
-<!-- copyright -->
-<div class="copyright w3-agile">
-	<p> © 2019</a></p>
-</div>
-	<!-- //copyright --> 
-	<script type="text/javascript" src="/login/js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript">
 
-	</script>
+<script>
+    $(function  () {
+
+
+
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+            var form = layui.form;
+
+            var errortype = '[[${errortype}]]';
+            var message = '[[${message}]]';
+
+            if(message != null && message != ''){
+                layer.tips(message, $('#'+errortype),{tips:[3,'#FF4500'],time:1000});//弹出框加回调函数
+			}
+
+            // layer.msg('玩命卖萌中', function(){
+            //   //关闭后的操作
+            //   });
+            //监听提交
+            // form.on('submit(login)', function(data){
+            //     // alert(888)
+            //     layer.msg(JSON.stringify(data.field),function(){
+            //         location.href='/loginDeal'
+            //     });
+            //     return false;
+            // });
+        });
+    })
+
+
+</script>
+
+
+<!-- 底部结束 -->
+<script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </body>
 </html>

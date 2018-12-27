@@ -25,26 +25,39 @@ public class LoginController extends BaseController{
      * @Description: 用户登录数据处理
      */
     @RequestMapping("/loginDeal")
-    public ModelAndView loginDeal(String loginname, String password, HttpServletRequest request)  throws Exception{
+    public String loginDeal(String loginname, String password, HttpServletRequest request)  throws Exception{
 
             request.setAttribute("loginname", loginname);
             request.setAttribute("password", password);
 
-            if (StringUtils.isEmpty(loginname) || StringUtils.isEmpty(password)) {
-                return returnView("登录账号和密码不能为空", "login/login");
+            if (StringUtils.isEmpty(loginname)) {
+                request.setAttribute("errortype","loginname");
+                request.setAttribute("message","登录账号不能为空");
+                return "login/login";
             }
 
             if(!"admin".equals(loginname)){
-                return returnView("登录账号不正确", "login/login");
+                request.setAttribute("errortype","loginname");
+                request.setAttribute("message","登录账号不正确");
+                return "login/login";
+            }
+
+            if (StringUtils.isEmpty(password)) {
+                request.setAttribute("errortype","password");
+                request.setAttribute("message","登录密码不能为空");
+                return "login/login";
             }
             if(!"123456".equals(password)){
-                return returnView("登录密码不正确", "login/login");
+                request.setAttribute("errortype","password");
+                request.setAttribute("message","登录密码不正确");
+                return "login/login";
             }
 
             // 保存操作员到session中
-            request.getSession().setAttribute("MobileOperator", new User());
+            request.getSession().setAttribute("Operator", new User());
 
-            return new ModelAndView("main/main");
+            return "main/main";
+
     }
 
     @RequestMapping("/welcome")
