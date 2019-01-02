@@ -58,7 +58,8 @@ public class BaseController {
 		list.addObject(Constrants.MESSAGE_TIP, message);
 		return list;
 	}
-	
+
+
 	public ModelAndView messageViewNew(String message) {
 		return new ModelAndView("error/message").addObject(Constrants.MESSAGE_TIP, message);
 	}
